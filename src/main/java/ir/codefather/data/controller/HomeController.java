@@ -25,9 +25,11 @@ public class HomeController {
     }
 
     @RequestMapping("/getUser")
-    public ModelAndView getUser(int id) {
+    public ModelAndView getUser(String id) {
         ModelAndView mv = new ModelAndView();
-        User user = userRepo.findById(id).orElse(new User());
+//        User user = userRepo.findById(id).orElse(new User());
+        //complex query
+        User user = userRepo.findByName(id);
         mv.addObject("obj", user);
         mv.setViewName("getUser.jsp");
         return mv;
