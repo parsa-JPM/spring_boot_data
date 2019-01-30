@@ -5,6 +5,7 @@ import ir.codefather.data.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
@@ -22,4 +23,14 @@ public class HomeController {
         userRepo.save(user);
         return "home.jsp";
     }
+
+    @RequestMapping("/getUser")
+    public ModelAndView getUser(int id) {
+        ModelAndView mv = new ModelAndView();
+        User user = userRepo.findById(id).orElse(new User());
+        mv.addObject("obj", user);
+        mv.setViewName("getUser.jsp");
+        return mv;
+    }
+
 }
